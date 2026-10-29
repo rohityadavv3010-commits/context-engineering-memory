@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#19182b">
+  <meta name="description" content="Context connects repository questions to the commits, reviews, issues and decisions that explain why code is the way it is.">
+  <title>Context — Why the Code Is Like This</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="Context home"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-name">context<span class="brand-sub">ENGINEERING MEMORY</span></span></a>
+  <nav class="main-nav" aria-label="Main navigation"><a href="#problem">The problem</a><a href="#how">How it works</a><a href="#trust">Trust</a></nav>
+  <a class="nav-cta" href="#demo">Try the demo <span>↗</span></a>
+</header>
+<main id="top">
+  <section class="hero section-wrap">
+    <div class="hero-copy">
+      <div class="eyebrow"><span></span> REPOSITORY MEMORY FOR ENGINEERING TEAMS</div>
+      <h1>Know <em>why</em> your code is the way it is.</h1>
+      <p class="hero-lede">Context connects code decisions to the commits, reviews, issues, and incidents behind them, so teams can understand the reasoning without chasing old conversations.</p>
+      <div class="hero-actions"><a class="button button-primary" href="#demo">Ask a sample question <span>→</span></a><a class="text-link" href="#how">See how it works <span>↓</span></a></div>
+      <div class="hero-points"><span><i>✓</i> Source-linked answers</span><span><i>✓</i> Visible uncertainty</span></div>
+    </div>
+    <div class="hero-visual" aria-label="Illustration of a question connected to source evidence">
+      <div class="visual-glow"></div>
+      <div class="question-card"><div class="question-card-top"><span class="repo-dot">N</span><span>northstar / payments</span><span class="demo-pill">DEMO</span></div><div class="question-card-label">REPOSITORY QUESTION</div><div class="question-card-text">Why does checkout use a custom retry policy?</div></div>
+      <div class="evidence-rail"><span class="rail-node"></span><span class="rail-line"></span><span class="rail-node"></span><span class="rail-line"></span><span class="rail-node last"></span></div>
+      <div class="source-stack"><div class="source-peek"><span class="source-icon purple">↗</span><span><b>Change introduced</b><small>Bounded retry for tax lookup</small></span><span class="source-type">COMMIT</span></div><div class="source-peek"><span class="source-icon teal">≋</span><span><b>Trade-off reviewed</b><small>Avoid duplicate order writes</small></span><span class="source-type">REVIEW</span></div><div class="source-peek"><span class="source-icon amber">!</span><span><b>Related incident</b><small>Tax service timeout spike</small></span><span class="source-type">INCIDENT</span></div></div>
+      <div class="confidence-note"><span class="confidence-ring">74</span><span><b>Evidence strength</b><small>Moderate · verify current behavior</small></span></div>
+      <div class="visual-caption">A claim with a path back to its sources.</div>
+    </div>
+  </section>
+
+  <section class="problem-section" id="problem"><div class="section-wrap problem-inner">
+    <div class="section-intro"><div class="eyebrow dark"><span></span> THE CONTEXT GAP</div><h2>Code shows what changed.<br><em>History explains why.</em></h2><p>Important decisions rarely live in one place. Their reasoning gets scattered across the tools teams already use.</p></div>
+    <div class="problem-points"><article><div class="number">01</div><h3>Context is scattered</h3><p>Commits, reviews, issues, docs, and incident notes each hold a piece of the decision.</p></article><article><div class="number teal-text">02</div><h3>People become the index</h3><p>Every change can interrupt the teammate who still remembers what happened.</p></article><article><div class="number">03</div><h3>Explanations drift</h3><p>Without a visible evidence trail, assumptions slowly become team folklore.</p></article></div>
+  </div></section>
+
+  <section class="demo-section" id="demo"><div class="section-wrap">
+    <div class="demo-heading"><div><div class="eyebrow"><span></span> EXPLORE THE PROTOTYPE</div><h2>Ask the repository a question.</h2><p>See a sample explanation, the evidence behind it, and the gaps that still need a human check.</p></div><span class="demo-label"><i></i> INTERACTIVE DEMO</span></div>
+    <div class="demo-window">
+      <div class="demo-topbar"><div class="window-dots"><i></i><i></i><i></i></div><span class="window-title">Context / Ask a question</span><span class="repo-selector"><b>N</b> northstar / payments <span>⌄</span></span></div>
+      <div class="demo-body">
+        <div class="demo-search-area"><div class="search-label">ASK ABOUT A CODE DECISION</div><form id="questionForm" class="question-form"><span class="search-symbol">⌕</span><label class="sr-only" for="questionInput">Ask a codebase question</label><input id="questionInput" placeholder="Why does checkout use a custom retry policy?" autocomplete="off"><button type="submit">Find context <span>→</span></button></form><div class="sample-prompts"><span>TRY:</span><div id="suggestionList"></div></div></div>
+        <div class="demo-results">
+          <section class="answer-pane"><div class="result-title"><div><span class="overline">REPOSITORY QUESTION</span><h3 id="resultQuestion"></h3></div><button id="copyAnswer" class="copy-button" type="button" aria-label="Copy answer" title="Copy answer">▢</button></div>
+            <div class="answer-card"><div class="answer-card-head"><span class="spark">✳</span><strong>Reconstructed explanation</strong><span id="confidenceBadge" class="confidence-badge"></span></div><p id="answerText"></p><div id="answerLabels" class="answer-labels"></div><div class="answer-actions"><button id="confirmButton" class="confirm-button" type="button">✓ Confirm context</button><button id="staleButton" class="review-button" type="button">Flag for review</button><span id="answerState" aria-live="polite"></span></div></div>
+            <div class="evidence-heading"><div><h4>Evidence trail</h4><p>Open a source to inspect the supporting record.</p></div><span id="sourceCount"></span></div><div class="evidence-list" id="evidenceList"></div>
+          </section>
+          <aside class="trust-pane"><div class="trust-head"><span>ANSWER QUALITY</span><span class="live-mark"><i></i> SOURCES LINKED</span></div><section><div class="insight-title"><i class="insight-symbol purple">◈</i><h4>What the record says</h4></div><p id="recordedText"></p></section><section><div class="insight-title"><i class="insight-symbol teal">⌁</i><h4>What we infer</h4></div><p id="inferredText"></p></section><section><div class="insight-title"><i class="insight-symbol amber">?</i><h4>What remains unclear</h4></div><p id="unknownText"></p></section><div class="freshness"><span>◷</span><p><b>Evidence freshness</b><small id="freshnessText"></small></p></div></aside>
+        </div>
+        <div class="demo-disclaimer"><span>ⓘ</span> This demo uses fictional repository records. It does not connect to a live codebase.</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="how-section" id="how"><div class="section-wrap"><div class="how-intro"><div class="eyebrow"><span></span> HOW CONTEXT WORKS</div><h2>From repository history<br>to a claim you can inspect.</h2></div><div class="steps"><article><span class="step-number">01</span><h3>Map the question</h3><p>Scope the repository, code area, owners, and related changes.</p></article><div class="step-arrow">→</div><article><span class="step-number">02</span><h3>Gather evidence</h3><p>Find connected commits, reviews, issues, docs, and incident signals.</p></article><div class="step-arrow">→</div><article><span class="step-number">03</span><h3>Assemble the explanation</h3><p>Link supporting records and keep gaps or alternate readings visible.</p></article></div></div></section>
+
+  <section class="trust-section" id="trust"><div class="section-wrap trust-layout"><div><div class="eyebrow"><span></span> BUILT FOR ENGINEERING TRUST</div><h2>Useful memory stays<br><em>open to correction.</em></h2><p class="trust-copy">Context helps teams find the rationale, check whether it still applies, and improve the record when they learn more.</p><a class="button button-light" href="#demo">Try another question <span>→</span></a></div><div class="trust-list"><article><span>↗</span><div><h3>Traceable answers</h3><p>Every explanation points to the source records it uses.</p></div></article><article><span>◷</span><div><h3>Freshness signals</h3><p>Older evidence is easy to spot and revisit.</p></div></article><article><span>↺</span><div><h3>Team correction</h3><p>Maintainers can confirm, correct, or flag a rationale.</p></div></article></div></div></section>
+</main>
+<footer class="site-footer"><a class="brand footer-brand" href="#top"><span class="brand-mark"><i></i><i></i><i></i></span><span class="brand-name">context<span class="brand-sub">ENGINEERING MEMORY</span></span></a><p>A living, inspectable record of why the system is the way it is.</p><span class="footer-demo">Hackathon prototype · fictional sample data</span></footer>
+<dialog id="sourceDialog" class="source-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close source details">×</button></form><div class="dialog-kicker" id="dialogType"></div><h2 id="dialogTitle"></h2><p id="dialogExcerpt"></p><div class="dialog-meta" id="dialogMeta"></div><div class="demo-source-note">Fictional sample source record for prototype demonstration</div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>
